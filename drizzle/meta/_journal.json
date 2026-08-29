@@ -1,0 +1,195 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1787364109679,
+      "tag": "0000_special_chronomancer",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1787364232845,
+      "tag": "0001_nappy_talon",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1787364273824,
+      "tag": "0002_normal_ogun",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1787365455212,
+      "tag": "0003_normal_leader",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1787367627476,
+      "tag": "0004_nervous_microbe",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1787367671014,
+      "tag": "0005_aberrant_rick_jones",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1787370105839,
+      "tag": "0006_red_wither",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1787370576540,
+      "tag": "0007_wandering_daredevil",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "5",
+      "when": 1787371205380,
+      "tag": "0008_freezing_true_believers",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "5",
+      "when": 1787375980435,
+      "tag": "0009_dusty_prowler",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "5",
+      "when": 1787388257659,
+      "tag": "0010_soft_senator_kelly",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "5",
+      "when": 1787389079455,
+      "tag": "0011_lowly_scarecrow",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "5",
+      "when": 1787390302175,
+      "tag": "0012_next_zombie",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "5",
+      "when": 1787392376653,
+      "tag": "0013_fearless_masked_marvel",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "5",
+      "when": 1787393527861,
+      "tag": "0014_overjoyed_grim_reaper",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "5",
+      "when": 1787403726077,
+      "tag": "0015_sloppy_silver_centurion",
+      "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "5",
+      "when": 1787404719123,
+      "tag": "0016_pretty_harrier",
+      "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "5",
+      "when": 1787405019985,
+      "tag": "0017_rainy_northstar",
+      "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "5",
+      "when": 1787406617804,
+      "tag": "0018_brave_prodigy",
+      "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "5",
+      "when": 1787409399295,
+      "tag": "0019_volatile_absorbing_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "5",
+      "when": 1787414404741,
+      "tag": "0020_good_talisman",
+      "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "5",
+      "when": 1787419358395,
+      "tag": "0021_previous_power_pack",
+      "breakpoints": true
+    },
+    {
+      "idx": 22,
+      "version": "5",
+      "when": 1787455724074,
+      "tag": "0022_previous_switch",
+      "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "5",
+      "when": 1787468966284,
+      "tag": "0023_motionless_lethal_legion",
+      "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "5",
+      "when": 1787481846500,
+      "tag": "0024_faithful_kronos",
+      "breakpoints": true
+    },
+    {
+      "idx": 25,
+      "version": "5",
+      "when": 1787482400051,
+      "tag": "0025_lowly_bushwacker",
+      "breakpoints": true
+    },
+    {
+      "idx": 26,
+      "version": "5",
+      "when": 1787836931471,
+      "tag": "0026_brave_baron_strucker",
+      "breakpoints": true
+    }
+  ]
+}

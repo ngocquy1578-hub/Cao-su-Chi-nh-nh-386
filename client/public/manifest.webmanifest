@@ -1,0 +1,14 @@
+{
+  "name": "Cao su CN386",
+  "short_name": "CN386",
+  "description": "Quản trị vườn cao su nội bộ",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8faf8",
+  "theme_color": "#0d2f25",
+  "icons": [
+    { "src": "/manus-storage/cn386-pwa-192_7c00b279.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/manus-storage/cn386-pwa-512_0ee4f9bc.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/cn386-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

@@ -1,0 +1,1 @@
+ALTER TABLE `daily_care_records` ADD `workContent` varchar(220);

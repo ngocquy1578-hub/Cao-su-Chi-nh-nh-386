@@ -1,0 +1,1 @@
+ALTER TABLE `plantation_plots` ADD `indicatorDate` timestamp;

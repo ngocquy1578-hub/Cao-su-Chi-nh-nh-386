@@ -1,0 +1,1 @@
+ALTER TABLE `plantation_plots` MODIFY COLUMN `areaHa` decimal(12,3) NOT NULL;

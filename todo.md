@@ -1,0 +1,271 @@
+# Project TODO
+
+- [x] Thiết kế mô hình dữ liệu cho vườn, nhập mủ, xuất mủ, chăm sóc, nhân công và báo cáo theo kỳ.
+- [x] Bổ sung lược đồ cơ sở dữ liệu và áp dụng migration cho toàn bộ nghiệp vụ vận hành.
+- [x] Thiết lập phân quyền Manus OAuth theo vai trò `admin` và `user` tại các thủ tục bảo vệ dữ liệu.
+- [x] Xây dựng API tRPC cho dashboard, vườn, nhập mủ, xuất mủ, chăm sóc, nhân công và báo cáo tiến độ nhập xuất mủ.
+- [x] Triển khai các quy tắc tính tự động: tổng mủ đông, cộng nhập, cộng xuất và hao kho = (cộng nhập − cộng xuất) / cộng nhập × 100%.
+- [x] Xây dựng bố cục dashboard nội bộ có sidebar điều hướng, trạng thái đăng nhập và điều hướng di động.
+- [x] Xây dựng dashboard tổng quan với số vườn, tổng sản lượng thu hoạch, số nhân công và tóm tắt kỳ đang xem.
+- [x] Xây dựng màn hình quản lý vườn với thêm, sửa, xóa và các trường đơn vị, diện tích.
+- [x] Xây dựng màn hình ghi nhận nhập mủ theo ngày và vườn, bao gồm mủ đông, mủ dây và tổng tự tính.
+- [x] Xây dựng màn hình ghi nhận xuất mủ theo kỳ với mủ đông tạp, mủ dây và cộng xuất tự tính.
+- [x] Xây dựng báo cáo tiến độ nhập xuất mủ theo kỳ, ngày và đơn vị/vườn, có dòng tổng và hao kho.
+- [x] Xây dựng màn hình nhật ký chăm sóc theo vườn, ngày và mô tả công việc.
+- [x] Xây dựng màn hình quản lý nhân công và phân công theo vườn/công việc.
+- [x] Tạo chức năng xuất báo cáo thành CSV và Excel, không nạp thư viện xuất file vào gói tải ban đầu.
+- [x] Hoàn thiện thiết kế giao diện chuyên nghiệp: hệ thống màu, typography, khoảng cách, trạng thái rỗng/tải/lỗi và khả năng đáp ứng.
+- [x] Viết và chạy kiểm thử Vitest cho công thức nghiệp vụ, phân quyền và API trọng yếu.
+- [x] Kiểm tra giao diện desktop/mobile, kiểm tra TypeScript và đánh giá kích thước bundle để tối ưu tải trang.
+- [x] Lưu checkpoint dự án hoàn chỉnh và bàn giao hướng dẫn sử dụng/publish.
+- [x] Chuẩn hóa báo cáo tiến độ thành bảng có cột nhập mủ theo từng ngày và đơn vị/vườn theo đúng cấu trúc nghiệp vụ.
+- [x] Tách `xlsx` thành async chunk riêng và xác minh không nằm trong gói tải đầu tiên.
+- [x] Bổ sung kiểm thử Vitest cho RBAC và router nghiệp vụ trọng yếu.
+- [x] Hoàn thiện nhận diện thương hiệu riêng và trạng thái lỗi tải dữ liệu cho các màn hình chính.
+- [x] Mở rộng dữ liệu vườn để lưu liên kết bản đồ hoặc sơ đồ lô vườn trên S3.
+- [x] Xây dựng API có phân quyền admin để tải lên, thay thế và xóa sơ đồ/bản đồ vườn.
+- [x] Thêm giao diện tải lên hình ảnh, xem trước và hiển thị bản đồ/sơ đồ trong quản lý vườn.
+- [x] Kiểm thử tải tệp, phân quyền và hiển thị bản đồ/sơ đồ trên desktop và mobile.
+- [x] Kiểm thử đầy đủ luồng upload sơ đồ trên UI với một vườn thực: tải ảnh, xem trước, lưu, mở lại và hiển thị desktop/mobile.
+- [x] Bổ sung kiểm thử các nhánh MIME không hợp lệ, giới hạn 5 MB và thay thế sơ đồ cũ của cùng một vườn.
+- [x] Tối ưu màn hình Vườn trên mobile bằng thẻ trực quan để xem sơ đồ lô không cần cuộn ngang bảng.
+- [x] Bổ sung kiểm thử API từ chối MIME không hợp lệ trước khi gọi kho lưu trữ.
+- [x] Xác minh lại luồng UI upload và hiển thị sơ đồ bằng phiên quản trị xác thực hợp lệ.
+- [x] Thu thập ảnh chụp từ phiên quản trị đã đăng nhập khi mở lại sơ đồ lô sau khi tải ảnh.
+- [x] Phân tích bốn tệp Excel nguồn và lập bảng đối chiếu các cột nghiệp vụ.
+- [x] Làm sạch, đối chiếu và nhập dữ liệu vườn/lô, nhân công, nhập mủ và xuất mủ vào cơ sở dữ liệu.
+- [x] Bổ sung màn hình import Excel với mẫu tải xuống, xem trước, kiểm tra lỗi và báo cáo kết quả nhập.
+- [x] Bổ sung export Excel dữ liệu vận hành cho vườn, nhân công, nhập mủ và xuất mủ.
+- [x] Kiểm thử import/export bằng tệp người dùng cung cấp và xác minh số liệu sau nhập.
+- [x] Hiển thị xem trước các dòng import cùng tổng số dòng hợp lệ và lỗi theo dòng/cột.
+- [x] Kiểm thử end-to-end màn hình Import & Excel với tệp người dùng cung cấp và lưu kết quả import chi tiết.
+- [x] Tự nhận diện loại dữ liệu từ tiêu đề cột Excel và hiển thị lý do tệp không khớp trước khi xem trước.
+- [x] Chuẩn hóa ngày import Excel theo UTC và khôi phục số liệu nhập mủ bị trùng do chênh lệch thời điểm.
+- [x] Kiểm thử import lặp của cùng một tệp không làm tăng số lượng hoặc tổng khối lượng bản ghi.
+- [x] Hiển thị kết quả import chi tiết gồm dòng hợp lệ, lỗi và hành động cập nhật trong ứng dụng.
+- [x] Chạy lại tệp nhập mủ sau sửa UTC và xác minh 108 bản ghi, 638.790 kg không thay đổi.
+- [x] Xây dựng truy vấn tổng hợp cộng nhập, cộng xuất và hao hụt kho theo đội, kỳ.
+- [x] Tạo trang báo cáo hao hụt kho với lọc theo kỳ, bảng số liệu, tổng hợp và xuất Excel.
+- [x] Kiểm thử công thức hao hụt kho theo đội với số liệu đã nhập và xác minh giao diện desktop/mobile.
+- [x] Tối ưu báo cáo hao hụt kho trên mobile bằng thẻ hiển thị đầy đủ cộng nhập, cộng xuất và tỷ lệ hao hụt.
+- [x] Bổ sung skeleton khi tải dữ liệu báo cáo hao hụt kho.
+- [x] Viết kiểm thử trực tiếp công thức tổng hợp hao hụt kho theo đội và kỳ.
+- [x] Kiểm thử lọc kỳ, xuất Excel từ báo cáo hao hụt kho và đối chiếu dữ liệu thực tế.
+- [x] Thiết kế báo cáo tăng giảm cộng nhập, cộng xuất theo đội, vườn, kỳ và tháng.
+- [x] Mở rộng dữ liệu chăm sóc thành bốn bảng: theo dõi cạo mủ; gia cố keo, máng, tấm che; chăm sóc; phun, bôi thuốc.
+- [x] Tạo biểu mẫu nhập liệu hằng ngày có chọn đội, vườn, ngày, nội dung, khối lượng và ghi chú.
+- [x] Xây dựng báo cáo tăng giảm có bộ lọc đội/vườn/kỳ/tháng và xuất Excel.
+- [x] Đối chiếu biểu mẫu với tệp mẫu người dùng cung cấp, kiểm thử phân quyền và giao diện desktop/mobile.
+- [x] Xuất Excel tổng hợp bốn bảng chăm sóc, chỉ tạo sheet cho bảng có bản ghi.
+- [x] Kiểm thử workbook tổng hợp để xác nhận sheet trống không xuất hiện.
+- [x] Nhập dữ liệu thực từ bốn sheet khai thác, gia cố, chăm sóc và phun/bôi thuốc vào bảng vận hành hằng ngày.
+- [x] Thêm trường nội dung công việc riêng trong biểu mẫu, bảng và workbook chăm sóc.
+- [x] Bổ sung bộ lọc vườn và tháng cho báo cáo tăng giảm, bao gồm export theo tập lọc.
+- [x] Viết kiểm thử quyền admin/user cho operations router và xác minh giao diện mobile.
+- [x] Kiểm thử workbook tổng hợp khi chỉ có một phần nhóm dữ liệu để xác nhận không sinh sheet trống.
+- [x] Tối ưu báo cáo tăng giảm trên mobile bằng thẻ chỉ số để tránh phụ thuộc vào cuộn ngang bảng.
+- [x] Đưa kiểm thử workbook bỏ sheet trống vào phạm vi Vitest đang chạy.
+- [x] Tạo và đối chiếu workbook kiểm thử khi chỉ có một nhóm chăm sóc có dữ liệu.
+- [x] Thiết kế bảng tài khoản nội bộ có tên đăng nhập, mật khẩu băm, trạng thái và phạm vi đơn vị.
+- [x] Thiết kế ba nhóm quyền: Ban Giám đốc, Cơ quan chức năng và Đội sản xuất, cùng các vai trò chi tiết.
+- [x] Xây dựng đăng nhập tên đăng nhập/mật khẩu, tạo tài khoản, đổi mật khẩu và thay đổi phân quyền do admin quản lý.
+- [x] Áp dụng kiểm soát truy cập dữ liệu theo nhóm, vai trò và đơn vị được cấp cho các module vườn, mủ, chăm sóc, nhân công, báo cáo, hao hụt kho và import/export.
+- [x] Xây dựng màn hình quản trị tài khoản, phân quyền và phân công phạm vi đơn vị.
+- [x] Cập nhật nhận diện Cao su CN386 và kiểm tra giao diện mobile.
+- [x] Kiểm thử xác thực, RBAC, bảo mật mật khẩu, tạo checkpoint WebDev và chuẩn bị xuất bản.
+- [x] Tạo tài khoản nhân sự thực tế sau khi nhận danh sách tên hiển thị, vai trò và phạm vi đơn vị từ quản trị viên.
+- [x] Phân tích file danh sách đăng nhập để đối chiếu tên đăng nhập, nhóm, vai trò và đơn vị.
+- [x] Tạo hoặc cập nhật tài khoản nội bộ từ danh sách được cung cấp, không lưu mật khẩu thuần văn bản.
+- [x] Xác minh số lượng tài khoản, nhóm quyền, phạm vi đơn vị và đăng nhập sau khi cấp phát.
+- [x] Đối chiếu phiên bản danh sách đăng nhập cập nhật và xử lý xung đột tên đăng nhập nếu có.
+- [x] Đối chiếu đầy đủ 29 tài khoản với nhóm, vai trò, quyền và phạm vi đơn vị không bị rút gọn kết quả.
+- [x] Kiểm thử đăng nhập thực tế đại diện cho Ban Giám đốc, cơ quan chức năng và đội sản xuất.
+- [x] Đối chiếu permissionProfile của toàn bộ 29 tài khoản theo đúng quy tắc nhóm, vai trò và phạm vi đơn vị.
+- [x] Thiết kế bảng nhật ký hoạt động lưu thời điểm, tài khoản, loại sự kiện, đối tượng và chi tiết thay đổi.
+- [x] Ghi nhận đăng nhập nội bộ, cấp/chỉnh quyền tài khoản và thao tác tạo/sửa/xóa dữ liệu trọng yếu.
+- [x] Tạo trang Nhật ký hoạt động có lọc theo tài khoản, loại sự kiện, thời gian và chỉ admin được truy cập.
+- [x] Kiểm thử ghi nhận sự kiện, phân quyền admin và giao diện desktop/mobile.
+- [x] Ghi audit cho các thao tác sửa/xóa dữ liệu trọng yếu còn lại và bổ sung kiểm thử xác nhận.
+- [x] Hoàn thiện lọc nhật ký theo tài khoản và khoảng thời gian tại API lẫn giao diện.
+- [x] Kiểm thử end-to-end bộ lọc nhật ký trong phiên admin hợp lệ trên desktop và mobile.
+- [x] Xác minh trực tiếp bộ lọc nhật ký trong phiên admin thật trên desktop và mobile.
+- [x] Xác minh trực tiếp bộ lọc Nhật ký hoạt động trên mobile trong phiên admin thật.
+- [x] Xác minh bằng công cụ phiên admin mobile và bộ lọc tài khoản/thời gian của Nhật ký hoạt động.
+- [x] Kiểm thử bộ lọc Nhật ký hoạt động trong browser session admin ở viewport mobile xác thực.
+- [x] Tạo và kiểm tra mã QR dẫn đến ứng dụng Cao su CN386 trên điện thoại.
+- [x] Kiểm tra các màn hình vận hành chính của Cao su CN386 trên viewport điện thoại.
+- [x] Tối ưu các điểm tràn, điều hướng, nút thao tác và khả năng đọc trên màn hình nhỏ.
+- [x] Xác minh lại giao diện mobile sau cập nhật và lưu phiên bản WebDev.
+- [x] Tối ưu mật độ và điều hướng mobile trên các trang Vườn, Báo cáo tăng giảm và Tài khoản & quyền.
+- [x] Lưu checkpoint mới và xác minh lại các màn hình mobile sau xuất bản.
+- [x] Tạo trang Cài đặt ứng dụng PWA có nút cài trên Android và hướng dẫn iPhone.
+- [x] Tạo mã QR mới dẫn trực tiếp đến trang cài đặt ứng dụng.
+- [x] Xác minh trang cài đặt và QR trên mobile trước khi xuất bản.
+- [x] Lưu checkpoint và xuất bản trang cài đặt PWA Cao su CN386.
+- [x] Kiểm tra domain published mở đúng `/install` và QR dẫn đến trang cài đặt.
+- [x] Thêm nút Cài ứng dụng trong menu chính dẫn đến trang cài PWA.
+- [x] Hiển thị banner cài đặt lần đầu có thể đóng và không lặp lại trong phiên thiết bị.
+- [x] Tạo video hướng dẫn cài Cao su CN386 trong 30 giây cho Android và iPhone.
+- [x] Kiểm tra banner, menu, video trên mobile và xuất bản phiên bản mới.
+- [x] Chẩn đoán và khắc phục lỗi truy cập tên miền ứng dụng Cao su CN386 đã xuất bản.
+- [x] Khắc phục tên miền trang chủ hiển thị chế độ bảo trì và xác minh truy cập công khai.
+- [x] Xác minh Cao su CN386 truy cập được từ máy tính hoặc mạng khác qua tên miền công khai.
+- [x] Dừng điều tra truy cập từ máy tính hoặc mạng khác theo yêu cầu của quản trị viên.
+- [x] Bổ sung phân loại Vườn A, Vườn B và Vườn C cho dữ liệu vườn, biểu mẫu và danh sách quản lý.
+- [x] Chuẩn hóa lựa chọn Đợt 1, Đợt 2 và Đợt 3 trong phần Đội, Nhập mủ, Xuất mủ và các bộ lọc báo cáo.
+- [x] Tạo giao diện chọn lọc và cập nhật hàng loạt các lô hiện tại vào Vườn A, Vườn B hoặc Vườn C.
+- [x] Kiểm thử cập nhật phân bổ lô hàng loạt, phân quyền admin và giao diện mobile trước khi xuất bản.
+- [x] Bổ sung khối Danh sách chung của Quản lý vườn với lọc toàn cơ quan/từng đội theo yêu cầu cuối cùng.
+- [x] Thay chỉ số mẫu ban đầu bằng bảng đúng nghiệp vụ gồm Đội, Vườn A/B/C, diện tích và ngày cạo.
+- [x] Kiểm thử giao diện Danh sách chung trên desktop/mobile và xuất bản.
+- [x] Thay Danh sách chung thành bảng tổng hợp Đội, Vườn A/B/C, diện tích và ngày cạo.
+- [x] Thêm chế độ xem riêng từng đội với Vườn A/B/C, Lô xếp theo thứ tự tăng dần và chỉnh sửa tên Vườn.
+- [x] Lưu checkpoint mới và xuất bản cập nhật Quản lý vườn theo danh sách chung/riêng từng đội.
+- [x] Xác minh trên domain published rằng Danh sách chung và chế độ xem riêng từng đội hiển thị đúng.
+- [x] Gom phần Nhân công theo từng đội và hiển thị số đang hoạt động.
+- [x] Chỉ hiển thị và tra cứu Tên phiên âm từ file trong giao diện Nhân công.
+- [x] Nhập chỉ tiêu biên chế mục tiêu từng đội để tính đúng thừa hoặc thiếu.
+- [x] Cập nhật tổng hợp Nhân công và kiểm thử chỉ số thừa/thiếu theo biên chế mục tiêu.
+- [x] Xác nhận chỉ tiêu biên chế: Đội 1 60, Đội 2 54, Đội 3 64, Đội 4 25, Đội 5 68, Đội 6 64.
+- [x] Gỡ mục Chăm sóc độc lập khỏi điều hướng, dùng Khai thác & chăm sóc hằng ngày làm điểm thao tác duy nhất.
+- [x] Chỉ hiển thị Nội dung công việc cho nhóm Chăm sóc và Phun, bôi thuốc trong Khai thác & chăm sóc hằng ngày.
+- [x] Chuẩn hóa thứ tự hiển thị Đội 1 đến Đội 6 tại các màn hình và tổng hợp liên quan.
+- [x] Đổi tên Nhân công thành Quản lý & Nhân công, bổ sung Ban Giám đốc, Cơ quan chức năng, Đội sản xuất và chỉ số biên chế/hiện có/thừa thiếu.
+- [x] Thu gọn danh sách nhân công theo đội; chỉ hiển thị đầy đủ nhân công của đội khi tài khoản đội đó đăng nhập.
+- [x] Kiểm thử quyền hiển thị, thứ tự đội, mobile và xuất bản cập nhật vận hành.
+- [x] Rà soát mọi màn hình, bảng và tổng hợp theo đội để áp dụng sắp xếp cố định Đội 1 đến Đội 6.
+- [x] Kiểm thử thứ tự đội trên báo cáo tiến độ, hao hụt kho, báo cáo tăng giảm và các tổng hợp liên quan.
+- [x] Rà soát các màn hình và tổng hợp theo đội còn lại để áp dụng thứ tự cố định Đội 1 đến Đội 6 nếu cần.
+- [x] Kiểm thử và ghi nhận bằng chứng cho các màn hình theo đội còn lại sau khi chuẩn hóa.
+- [x] Xuất bản checkpoint và xác minh tên miền công khai cho cập nhật vận hành mới.
+- [x] Bổ sung mã số nhân công vào dữ liệu và tìm kiếm nhanh theo tên phiên âm hoặc mã số trong từng đội.
+- [x] Tạo chức năng xuất báo cáo Quản lý & Nhân công ra Excel theo phạm vi dữ liệu được phép xem.
+- [x] Kiểm thử tìm kiếm, xuất Excel, quyền theo đội, mobile và xuất bản.
+- [x] Tạo mẫu Excel nhập mã số nhân công hàng loạt với khóa Đội, Tên phiên âm và Mã số.
+- [x] Xây dựng xem trước, đối chiếu, kiểm tra trùng mã và cập nhật mã số hàng loạt chỉ cho admin.
+- [x] Kiểm thử import mã số hàng loạt, quyền admin, dữ liệu trùng/không khớp và giao diện desktop/mobile.
+- [x] Bổ sung chọn và hiển thị Đội trong Nhập mủ; đổi nhãn Vườn thành Đội trong Xuất mủ.
+- [x] Sắp Danh sách lô cao su theo năm trồng rồi tên/số lô tăng dần.
+- [x] Thiết kế lại Tổng quan vận hành với tổng diện tích, tổng vườn, quản lý & nhân công, sản lượng theo kỳ/tháng, biểu đồ và tổng quan 6 đội.
+- [x] Kiểm thử số liệu không làm tròn, biểu đồ và mobile cho cập nhật vận hành.
+- [x] Lưu checkpoint, xuất bản và xác minh tên miền công khai cho các cập nhật vận hành mới.
+- [x] Kiểm tra PWA, service worker, manifest và luồng cài ứng dụng trên Android/iPhone.
+- [x] Cập nhật hướng dẫn/cài đặt để người dùng điện thoại thực hiện được theo trình duyệt phù hợp.
+- [x] Kiểm thử mobile và xác minh lại trang cài ứng dụng.
+- [x] Thêm nút Cài đặt rõ ràng và tự ẩn banner/hộp gợi ý ngay sau khi ứng dụng được cài.
+- [x] Kiểm thử trạng thái đã cài và mobile cho nút Cài đặt.
+- [x] Bổ sung icon PWA chuẩn và chẩn đoán trạng thái không phát lời nhắc cài đặt trên Android.
+- [x] Hiển thị nút Cài đặt cùng thông báo phù hợp khi Android chưa đủ điều kiện phát lời nhắc.
+- [x] Xuất bản và xác minh nút Cài đặt mới trên tên miền công khai.
+- [x] Bổ sung khối Quản lý sản lượng mủ có lọc ngày và toàn bộ/từng đội.
+- [x] Hiển thị Mủ đông tạp nhập, Mủ dây nhập, Tổng nhập và số bản ghi nhập/xuất đúng dữ liệu nguồn.
+- [x] Kiểm thử khối Sản lượng trên desktop/mobile, xuất bản và xác minh tên miền công khai.
+- [x] Đơn giản hóa menu, nhóm mục theo Điều hành, Báo cáo và Hệ thống để dễ nhìn trên desktop/mobile.
+- [x] Kiểm thử menu gọn nhẹ, mục đang chọn và quyền hiển thị theo vai trò.
+- [x] Bổ sung lọc thời gian chi tiết theo tháng và năm cho Quản lý sản lượng mủ.
+- [x] Thêm xuất Excel dữ liệu sản lượng theo bộ lọc tháng/năm và đội.
+- [x] Bổ sung chọn từng đội trong khối Nhân công 6 đội trên Tổng quan.
+- [x] Chuẩn hóa thứ tự sản lượng từng kỳ: Đợt 1-7, 2-7, 3-7, tiếp đến 1-8, 2-8, 3-8.
+- [x] Thu gọn bố cục Tổng quan trên mobile để lọc, thẻ số liệu, bảng và biểu đồ dễ dùng hơn.
+- [x] Kiểm thử số liệu, Excel, mobile và xuất bản Tổng quan vận hành mới.
+- [x] Tinh chỉnh bảng Tổng quan theo 6 đội với cột rõ ràng, hàng dễ quét và số liệu thẳng hàng.
+- [x] Hiển thị nhãn Phân tích sản lượng theo đúng kỳ đang chọn, không cố định Đợt 1.
+- [x] Thu gọn header và bộ chọn Kỳ xem trên mobile theo mẫu giao diện.
+- [x] Kiểm thử desktop/mobile, xuất bản và xác minh Tổng quan sau tinh chỉnh.
+- [x] Bổ sung tùy chỉnh ẩn/hiện cột trong bảng Tổng quan theo 6 đội.
+- [x] Bổ sung so sánh sản lượng theo tháng với tháng trước trong Tổng quan.
+- [x] Bổ sung biểu đồ xu hướng biến động nhân công theo các tháng.
+- [x] Kiểm thử số liệu, điều khiển cột, mobile và xuất bản Tổng quan mở rộng.
+- [x] Kiểm tra cấu trúc, dòng hợp lệ và khóa đối chiếu của tệp 1.import-Vuoncay,lo.xlsx.
+- [x] Nhập dữ liệu vườn cây/lô theo tệp nguồn, cập nhật an toàn các lô trùng và báo cáo kết quả.
+- [x] Kiểm tra lại tổng số lô, diện tích và dữ liệu theo đội sau khi nhập.
+- [x] Sau khi nhập xong, bổ sung so sánh sản lượng tháng trước theo từng đội.
+- [x] Sau khi nhập xong, lưu và khôi phục cấu hình ẩn/hiện cột riêng cho mỗi tài khoản.
+- [x] Bổ sung tổng hợp và biểu đồ so sánh sản lượng theo quý cho từng Đội 1–6.
+- [x] Tạo mẫu Excel, xem trước và nhập định kỳ các chỉ số cây theo mã lô.
+- [x] Kiểm thử số liệu quý, import chỉ số cây, quyền admin và mobile.
+- [x] Lưu checkpoint, xuất bản và xác minh tên miền công khai cho biểu đồ quý và nhập chỉ số cây định kỳ.
+- [x] Bổ sung tổng hợp sản lượng quý hiện tại và cùng quý năm trước theo từng Đội 1–6.
+- [x] Hiển thị sản lượng năm trước, chênh lệch kg và tỷ lệ tăng/giảm trong biểu đồ/bảng quý khi có dữ liệu nguồn.
+- [x] Kiểm thử dữ liệu cùng kỳ, mobile và xuất bản so sánh quý năm trước.
+- [x] Đối chiếu diện tích từng Đội với dữ liệu lô và file Excel, chuẩn hóa tổng 1.582,711 ha và hiển thị 03 chữ số thập phân.
+- [x] Đổi giao diện diện tích vườn cao su sang hiển thị 02 chữ số thập phân, vẫn giữ dữ liệu nguồn 03 chữ số.
+- [x] Bổ sung nút Nhập Quản lý trong khối Đội ngũ quản lý và nút Xem danh sách tại từng thẻ Đội nhân công.
+- [x] Thêm tìm kiếm nhân công trong hộp Xem danh sách của từng Đội.
+- [x] Thêm xuất Excel danh sách nhân công theo từng Đội, tuân thủ phạm vi quyền.
+- [x] Bổ sung theo dõi lịch sử biến động nhân công theo từng tháng bằng dữ liệu nguồn thực tế.
+- [x] Bổ sung chốt snapshot nhân công đầu tháng, lịch sử riêng từng Đội và xu hướng 12 tháng từ dữ liệu thực.
+- [x] Cấu hình lịch tự động chốt snapshot nhân công lúc 00:05 ngày 01 hằng tháng theo giờ Việt Nam.
+- [x] Thêm bộ lọc Tháng, chỉ hiển thị Đợt có dữ liệu và sắp xếp báo cáo hao hụt kho từ mới đến cũ.
+- [x] Điều chỉnh Báo cáo tăng giảm hiển thị tổng chung và từng Đội đến hiện tại; khi chọn bộ lọc chỉ hiển thị đúng dữ liệu lọc.
+- [x] Tạm hoãn đối chiếu và cập nhật phân chia Vườn A/B/C Đội 2 theo yêu cầu quản trị viên; chưa thay đổi dữ liệu khi chưa có file xác nhận.
+- [x] Xuất file Excel đối chiếu Đội 2 để người dùng kiểm tra và xác nhận trước khi áp dụng cập nhật.
+- [x] Đưa các cột Nhân công, Vườn A/B/C, Mã lô, Hàng từ, Hàng đến và Diện tích vào file đối chiếu theo từng dòng phân công.
+- [x] Đổi danh sách nhân công trong file phân công Đội 2 sang tên La tinh, không dùng tên phiên âm.
+- [x] Xuất file Phân chia nhân công vườn cây theo mẫu, lấy Đội 1–6, nhân công và dữ liệu lô từ hệ thống.
+- [x] Chuẩn hóa file Phân chia nhân công vườn cây theo hợp đồng import của phần mềm.
+- [x] Bổ sung kiểm tra và nhập Excel phân chia nhân công vườn cây vào dữ liệu phân công.
+- [x] Chuyển dữ liệu THCHUNG KIỂM KÊ sang file import Chỉ số cây với ngày cập nhật 22/8/2026 để người dùng kiểm tra.
+- [x] Nhập 208 dòng kiểm kê chỉ số cây ngày 22/8/2026, ghi đè an toàn dữ liệu chỉ số cũ theo mã lô trùng.
+- [x] Bổ sung biểu đồ phân bố diện tích vườn cây theo từng Đội và nhân công, dùng dữ liệu phân công thực tế.
+- [x] Thêm bộ lọc Vườn A/B/C cho biểu đồ phân bố diện tích theo Đội và nhân công.
+- [x] Tinh gọn Quản lý vườn: ẩn thẻ Vườn A/B/C và bỏ cột Biên chế, Ngày cạo, Sơ đồ lô.
+- [x] Đổi Xem lô thành Xem riêng; bổ sung thao tác Chỉnh sửa và Import theo từng Đội.
+- [x] Bổ sung Từ hàng, Đến hàng, Diện tích và Số cây cạo vào luồng phân bổ lô Vườn A/B/C.
+- [x] Thêm trạng thái và hiệu ứng tải theo từng Đội khi import file Excel.
+- [x] Bổ sung lịch sử chỉnh sửa phân bổ lô có thể xem lại theo Đội.
+- [x] Thêm nút xuất Excel lịch sử phân bổ lô theo phạm vi Đội đang xem.
+- [x] Bỏ trường Vườn, Diện tích, Phần cạo tại các biểu mẫu gia cố, chăm sóc, phun bôi thuốc theo ảnh mẫu.
+- [x] Đổi Vườn hoàn thành thành % hoàn thành trong các biểu mẫu theo dõi hằng ngày.
+- [x] Cập nhật biểu mẫu Theo dõi cạo mủ với chỉ tiêu Chưa cạo, Cạo chưa xong, Cạo xong (vườn), % hoàn thành và Cạo tiếp vườn.
+- [x] Thêm nút xuất Excel riêng cho bảng Theo dõi cạo mủ, Gia cố, Chăm sóc và Phun/bôi thuốc đang xem.
+- [x] Thêm bộ lọc Từ ngày – Đến ngày cho bảng theo dõi và file Excel xuất riêng.
+- [x] Rà soát tính toàn vẹn dữ liệu, phân quyền và tương thích các luồng import/export toàn hệ thống.
+- [x] Khắc phục các xung đột hoặc lỗi đã xác minh mà không làm mất dữ liệu.
+- [x] Tạo hai gói ZIP riêng: Bộ file Import và Bộ file Export cho toàn bộ nội dung hệ thống.
+- [x] Tạo bản sao lưu dữ liệu tự động hằng tuần, không chứa mật khẩu hoặc bí mật xác thực.
+- [x] Bổ sung màn hình quản trị tải xuống các bản sao lưu theo quyền admin.
+- [x] Cấu hình lịch tự động sao lưu lúc 00:15 Chủ nhật theo giờ Việt Nam, duy trì 8 bản gần nhất.
+- [x] Bỏ trường Lô đối chiếu và bổ sung hao kho tính theo số liệu thực trong biểu mẫu Xuất mủ.
+- [x] Thêm bộ lọc Từ ngày – Đến ngày cho nhật ký Xuất mủ.
+- [x] Thêm xuất Excel nhật ký Xuất mủ theo từng Đội và khoảng thời gian đã chọn.
+- [x] Thêm bộ lọc Đợt cho nhật ký Xuất mủ và file Excel theo tập lọc.
+- [x] Thêm dòng Tổng khối lượng vào file Excel nhật ký Xuất mủ.
+- [x] Bổ sung cột Người lập và Ghi chú vào báo cáo nhật ký Xuất mủ.
+- [x] Tạo tổng hợp sản lượng theo từng lô với STT, Lô, Năm trồng, Diện tích, Mủ đông/tạp và Quy khô.
+- [x] Bổ sung lọc tổng hợp sản lượng theo năm, tháng và Đội; tên lô lấy từ dữ liệu hệ thống.
+- [x] Bổ sung nhập tay Quy khô theo lô và kỳ báo cáo, có kiểm soát phạm vi quyền.
+- [x] Cho phép nhập tay hoặc import Excel cả Mủ đông/tạp và Quy khô theo từng lô.
+- [x] Bỏ trường Diện tích (ha) và Phần cạo khỏi biểu mẫu Theo dõi cạo mủ, giữ nguyên dữ liệu đã lưu.
+- [x] Ẩn Mã lô kỹ thuật trong cột Đơn vị/Vườn của Báo cáo tiến độ, chỉ hiển thị tên Lô và năm trồng.
+- [x] Ẩn danh sách nhân công xem trước trên thẻ từng Đội, giữ nút Xem danh sách theo quyền.
+- [x] Chỉ hiển thị tên Lô trong Báo cáo tiến độ, không hiển thị Mã lô kỹ thuật.
+- [x] Ẩn các tên nhân công xem trước trong thẻ Đội, chỉ mở danh sách qua nút Xem danh sách.
+- [x] Đổi trường Vườn của Theo dõi cạo mủ thành danh sách thả xuống từ danh mục lô/vườn theo Đội đã chọn.
+- [x] Đổi trường Đội của Theo dõi cạo mủ thành danh sách thả xuống theo phạm vi dữ liệu được cấp quyền.
+- [x] Thêm tìm kiếm nhanh Lô trong danh sách chọn Vườn/Lô của Theo dõi cạo mủ.
+- [x] Bổ sung bộ lọc Đội cho Báo cáo tiến độ và áp dụng đúng tập lọc khi xuất báo cáo.
+- [x] Tự ghi nhớ Đội đã chọn cho lần nhập Theo dõi cạo mủ tiếp theo trên cùng thiết bị.
+- [x] Hiển thị số lượng Lô tìm thấy khi tìm nhanh trong danh sách Vườn/Lô.
+- [x] Sắp xếp Lô của từng Đội theo năm trồng trước, sau đó theo số/tên Lô tăng dần trong danh sách và lựa chọn Lô.
+- [x] Hiển thị tổng diện tích Lô theo từng năm trồng trong phần danh sách/báo cáo Lô.
+- [x] Sắp xếp danh sách Lô hết Đội 1, sau đó Đội 2 đến Đội 6; trong từng Đội giữ thứ tự năm trồng và số/tên Lô.
+- [x] Nhóm danh sách Lô theo từng Đội, có tiêu đề phân cách và tổng diện tích thực tế của Đội.
+- [x] Thêm thu gọn/mở rộng danh sách Lô cho từng Đội.
+- [x] Thêm thanh điều hướng nhanh để nhảy đến danh sách Lô của Đội được chọn.
+- [x] Hiển thị số Lô thuộc Vườn A, B, C trên thanh tiêu đề của từng nhóm Đội.
+- [x] Thêm nút xuất Excel danh sách Lô riêng của từng Đội ngay trên thanh tiêu đề.
+- [x] Nhóm/sắp xếp danh sách Lô trong từng Đội theo Vườn A, Vườn B, Vườn C.
+- [x] Hiển thị tổng diện tích chi tiết của Vườn A, Vườn B, Vườn C trên thanh tiêu đề Đội.
+- [x] Thêm biểu đồ diện tích Vườn A, B, C theo từng Đội trong phần báo cáo, dùng dữ liệu Lô thực tế.
+- [x] Đổi nhập và hiển thị Sản lượng theo lô từ Ngày sang Tháng/Năm, giữ tương thích dữ liệu lịch sử.
+- [x] Cập nhật mẫu/import/xuất Excel Sản lượng theo lô dùng Tháng và Năm.
+- [x] Hiển thị cột Đội trước cột Lô trong tổng hợp và Excel Sản lượng theo lô.
+- [x] Cho phép nhập nhanh sản lượng cho nhiều Lô trong cùng Tháng/Năm.
+- [x] Thêm khóa kỳ theo Tháng/Năm để ngăn nhập hoặc sửa sản lượng sau khi chốt, có kiểm soát quyền.
+- [x] Thêm biểu đồ so sánh Mủ đông/tạp và Quy khô theo từng Đội trong báo cáo sản lượng theo lô.
+- [x] Hiển thị cột Vườn A/B/C hoặc Chưa phân loại cho từng Lô trong danh sách theo Đội.
+- [x] Thêm bộ lọc xem riêng Lô thuộc Vườn A, B hoặc C trong từng Đội.
+- [x] Thêm màu nền và nhãn màu riêng để nhận diện Vườn A, B, C trong danh sách Lô.
+- [x] Bổ sung tổng diện tích chi tiết Vườn A/B/C vào file Excel danh sách Lô riêng theo Đội.
+- [x] Thêm biểu đồ tròn tỷ trọng diện tích Vườn A/B/C trong từng nhóm Đội, dùng dữ liệu Lô thực tế.

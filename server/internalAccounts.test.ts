@@ -1,0 +1,14 @@
+import { describe, expect, it, vi } from "vitest";
+import type { TrpcContext } from "./_core/context";
+const dbMocks = vi.hoisted(() => ({ getInternalAccountByUsername: vi.fn(), createInternalAccount: vi.fn(() => ({ userId: 3 })), logActivity: vi.fn(), listInternalAccounts: vi.fn(), updateInternalAccount: vi.fn() }));
+vi.mock("./db", () => dbMocks);
+vi.mock("./internalAuth", () => ({ verifyPassword: vi.fn(() => true), hashPassword: vi.fn(() => "hashed"), sessionToken: vi.fn(() => "token"), internalSessionCookie: vi.fn(() => ({ name: "session", value: "token", options: {} })), clearInternalSessionCookie: vi.fn(() => ({ name: "session", options: {} })) }));
+import { appRouter } from "./routers";
+function context(role: "admin" | "user"): TrpcContext { return { user: { id: role === "admin" ? 1 : 2, openId: role, name: role, email: null, loginMethod: "internal", role, createdAt: new Date(), updatedAt: new Date(), lastSignedIn: new Date() }, req: { protocol: "https", headers: {} } as TrpcContext["req"], res: { clearCookie: vi.fn(), cookie: vi.fn() } as unknown as TrpcContext["res"] }; }
+function createContext(role: "admin" | "user") { const cookieCalls: unknown[][] = []; const ctx = context(role); ctx.res = { clearCookie: vi.fn(), cookie: (...args: unknown[]) => cookieCalls.push(args) } as unknown as TrpcContext["res"]; return { ctx, cookieCalls }; }
+const account = { username: "doi1.truong", password: "MatKhau!2026", displayName: "Đội trưởng 1", groupType: "production" as const, roleCode: "team_leader", scopeUnits: ["Đội 1"], permissions: ["care:read", "care:write"] };
+describe("internal accounts router", () => {
+  it("đăng nhập bằng tên đăng nhập mật khẩu, tạo session và ghi nhật ký", async () => { dbMocks.getInternalAccountByUsername.mockResolvedValue({ userId: 2, username: "doi1.truong", passwordHash: "hashed", displayName: "Đội trưởng 1", isActive: 1 }); const { ctx, cookieCalls } = createContext("user"); await expect(appRouter.createCaller(ctx).internalAccounts.login({ username: "doi1.truong", password: "MatKhau!2026" })).resolves.toMatchObject({ success: true, displayName: "Đội trưởng 1" }); expect(cookieCalls).toHaveLength(1); expect(dbMocks.logActivity).toHaveBeenCalledWith(2, expect.objectContaining({ eventType: "auth.login" })); });
+  it("cho phép admin tạo tài khoản và cấp phạm vi", async () => { dbMocks.getInternalAccountByUsername.mockResolvedValue(undefined); await expect(appRouter.createCaller(context("admin")).internalAccounts.create(account)).resolves.toEqual({ success: true }); expect(dbMocks.createInternalAccount).toHaveBeenCalledWith(account, "hashed", 1); });
+  it("từ chối người dùng thường quản trị tài khoản", async () => { await expect(appRouter.createCaller(context("user")).internalAccounts.create(account)).rejects.toMatchObject({ code: "FORBIDDEN" }); });
+});

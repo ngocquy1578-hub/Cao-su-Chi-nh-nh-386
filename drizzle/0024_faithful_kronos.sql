@@ -1,0 +1,1 @@
+ALTER TABLE `team_latex_exports` ADD `note` text;
