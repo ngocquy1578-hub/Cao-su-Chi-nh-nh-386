@@ -101,6 +101,24 @@ export const plantationPlots = mysqlTable(
   }),
 );
 
+export const plotGardenAllocations = mysqlTable(
+  "plot_garden_allocations",
+  {
+    id: int("id").autoincrement().primaryKey(),
+    plotId: int("plotId").notNull(),
+    gardenType: mysqlEnum("gardenType", ["A", "B", "C"]).notNull(),
+    areaHa: decimal("areaHa", { precision: 12, scale: 3 }).notNull(),
+    tappingTrees: int("tappingTrees").default(0).notNull(),
+    createdBy: int("createdBy").notNull(),
+    createdAt: timestamp("createdAt").defaultNow().notNull(),
+    updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  },
+  table => ({
+    plotGardenUnique: uniqueIndex("plot_garden_allocations_plot_garden_unique").on(table.plotId, table.gardenType),
+    plotIndex: index("plot_garden_allocations_plot_index").on(table.plotId),
+  }),
+);
+
 export const latexImports = mysqlTable(
   "latex_imports",
   {

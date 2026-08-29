@@ -12,6 +12,7 @@ import {
   latexImports,
   managementGroupTargets,
   plantationPlots,
+  plotGardenAllocations,
   plotLatexProductions,
   plotProductionPeriodLocks,
   teamLatexExports,
@@ -102,7 +103,7 @@ export type ActivityLogInput = { eventType: string; entityType: string; entityId
 export async function logActivity(userId: number, input: ActivityLogInput) { const db = await getDb(); if (!db) return; const [account, user] = await Promise.all([getInternalAccountByUserId(userId), getUserById(userId)]); await db.insert(activityLogs).values({ userId, username: account?.username ?? null, displayName: account?.displayName ?? user?.name ?? null, eventType: input.eventType, entityType: input.entityType, entityId: input.entityId == null ? null : String(input.entityId), summary: input.summary, metadata: input.metadata ? JSON.stringify(input.metadata) : null }); }
 export async function listActivityLogs(filters?: { userId?: number; username?: string; eventType?: string; startDate?: string; endDate?: string; limit?: number }) { const db = await getDb(); if (!db) return []; const rows = await db.select().from(activityLogs).orderBy(desc(activityLogs.createdAt)).limit(Math.min(filters?.limit ?? 300, 500)); const start = filters?.startDate ? new Date(`${filters.startDate}T00:00:00.000Z`) : null; const end = filters?.endDate ? new Date(`${filters.endDate}T23:59:59.999Z`) : null; return rows.filter(row => (filters?.userId == null || row.userId === filters.userId) && (!filters?.username || row.username === filters.username) && (!filters?.eventType || row.eventType === filters.eventType) && (!start || row.createdAt >= start) && (!end || row.createdAt <= end)).map(row => ({ ...row, metadata: row.metadata ? JSON.parse(row.metadata) : null })); }
 export async function listActivityActors() { const db = await getDb(); if (!db) return []; const rows = await db.select({ username: internalAccounts.username, displayName: internalAccounts.displayName }).from(internalAccounts).orderBy(asc(internalAccounts.displayName)); return rows; }
-export async function listPlotAllocationHistory(unit?: string) { const db = await getDb(); if (!db) return []; const rows = await db.select().from(activityLogs).where(eq(activityLogs.eventType, "plot.garden_type.bulk_assign")).orderBy(desc(activityLogs.createdAt)).limit(200); return rows.map(row => ({ ...row, metadata: row.metadata ? JSON.parse(row.metadata) : null })).filter(row => !unit || (row.metadata as { unit?: string } | null)?.unit === unit); }
+export async function listPlotAllocationHistory(unit?: string) { const db = await getDb(); if (!db) return [];   const rows = await db.select().from(activityLogs).where(inArray(activityLogs.eventType, ["plot.garden_type.bulk_assign", "plot.garden_portion.allocate"])).orderBy(desc(activityLogs.createdAt)).limit(200); return rows.map(row => ({ ...row, metadata: row.metadata ? JSON.parse(row.metadata) : null })).filter(row => !unit || (row.metadata as { unit?: string } | null)?.unit === unit); }
 
 const numberValue = (value: unknown) => Number(value ?? 0);
 const asQuantity = (value: number) => value.toFixed(2);
@@ -124,8 +125,57 @@ export type PlotPayload = {
 export async function listPlots() {
   const db = await getDb();
   if (!db) return [];
-  const rows = await db.select().from(plantationPlots).orderBy(asc(plantationPlots.unit), asc(plantationPlots.code));
-  return rows.map(row => ({ ...row, areaHa: numberValue(row.areaHa) }));
+  const [rows, allocationRows] = await Promise.all([
+    db.select().from(plantationPlots).orderBy(asc(plantationPlots.unit), asc(plantationPlots.code)),
+    db.select().from(plotGardenAllocations).orderBy(asc(plotGardenAllocations.plotId), asc(plotGardenAllocations.gardenType)),
+  ]);
+  const allocationsByPlot = new Map<number, typeof allocationRows>();
+  allocationRows.forEach(row => {
+    const list = allocationsByPlot.get(row.plotId) ?? [];
+    list.push(row);
+    allocationsByPlot.set(row.plotId, list);
+  });
+  return rows.map(row => {
+    const allocations = allocationsByPlot.get(row.id) ?? [];
+    const allocatedAreaHa = allocations.reduce((sum, allocation) => sum + numberValue(allocation.areaHa), 0);
+    const allocatedTappingTrees = allocations.reduce((sum, allocation) => sum + Number(allocation.tappingTrees ?? 0), 0);
+    const totalAreaHa = numberValue(row.areaHa);
+    const totalTappingTrees = row.tappingTrees == null ? null : Number(row.tappingTrees);
+    return {
+      ...row,
+      areaHa: totalAreaHa,
+      tappingTrees: totalTappingTrees,
+      gardenAllocations: allocations.map(allocation => ({ ...allocation, areaHa: numberValue(allocation.areaHa), tappingTrees: Number(allocation.tappingTrees ?? 0) })),
+      allocatedAreaHa,
+      allocatedTappingTrees,
+      remainingAreaHa: Math.max(0, totalAreaHa - allocatedAreaHa),
+      remainingTappingTrees: totalTappingTrees == null ? null : Math.max(0, totalTappingTrees - allocatedTappingTrees),
+    };
+  });
+}
+
+export async function allocatePlotGardenPortion(input: { plotId: number; gardenType: "A" | "B" | "C"; areaHa: number; tappingTrees: number }, userId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Cơ sở dữ liệu chưa sẵn sàng");
+  const plot = (await db.select().from(plantationPlots).where(eq(plantationPlots.id, input.plotId)).limit(1))[0];
+  if (!plot) throw new Error("Không tìm thấy Lô");
+  const allocations = await db.select().from(plotGardenAllocations).where(eq(plotGardenAllocations.plotId, input.plotId));
+  const allocatedAreaHa = allocations.reduce((sum, allocation) => sum + numberValue(allocation.areaHa), 0);
+  const allocatedTappingTrees = allocations.reduce((sum, allocation) => sum + Number(allocation.tappingTrees ?? 0), 0);
+  const totalAreaHa = numberValue(plot.areaHa);
+  const totalTappingTrees = plot.tappingTrees == null ? null : Number(plot.tappingTrees);
+  const nextAreaHa = allocatedAreaHa + input.areaHa;
+  const nextTappingTrees = allocatedTappingTrees + input.tappingTrees;
+  if (nextAreaHa > totalAreaHa + 0.0005) throw new Error(`Diện tích phân bổ vượt quá diện tích còn lại của Lô (${Math.max(0, totalAreaHa - allocatedAreaHa).toFixed(3)} ha)`);
+  if (totalTappingTrees == null) throw new Error("Lô chưa có tổng số cây cạo; hãy cập nhật số cây cạo của Lô trước");
+  if (nextTappingTrees > totalTappingTrees) throw new Error(`Số cây cạo phân bổ vượt quá số cây còn lại của Lô (${Math.max(0, totalTappingTrees - allocatedTappingTrees)} cây)`);
+  const existing = allocations.find(allocation => allocation.gardenType === input.gardenType);
+  if (existing) {
+    await db.update(plotGardenAllocations).set({ areaHa: asArea(numberValue(existing.areaHa) + input.areaHa), tappingTrees: Number(existing.tappingTrees ?? 0) + input.tappingTrees, createdBy: userId }).where(eq(plotGardenAllocations.id, existing.id));
+  } else {
+    await db.insert(plotGardenAllocations).values({ plotId: input.plotId, gardenType: input.gardenType, areaHa: asArea(input.areaHa), tappingTrees: input.tappingTrees, createdBy: userId });
+  }
+  return { remainingAreaHa: Math.max(0, totalAreaHa - nextAreaHa), remainingTappingTrees: Math.max(0, totalTappingTrees - nextTappingTrees), allocatedAreaHa: nextAreaHa, allocatedTappingTrees: nextTappingTrees };
 }
 
 export async function getPlotById(id: number) { const db = await getDb(); if (!db) return undefined; return (await db.select().from(plantationPlots).where(eq(plantationPlots.id, id)).limit(1))[0]; }
@@ -330,6 +380,7 @@ export async function removePlot(id: number) {
   if (imports.length || exports.length || care.length || assignments.length) {
     throw new Error("Không thể xóa vườn đang có dữ liệu vận hành");
   }
+  await db.delete(plotGardenAllocations).where(eq(plotGardenAllocations.plotId, id));
   await db.delete(plantationPlots).where(eq(plantationPlots.id, id));
 }
 

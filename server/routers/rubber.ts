@@ -104,6 +104,13 @@ export const rubberRouter = router({
       await Promise.all(Array.from(byUnit).map(([unit, unitPlotIds]) => db.logActivity(ctx.user.id, { eventType: "plot.garden_type.bulk_assign", entityType: "plot", summary: `Phân bổ ${unitPlotIds.length} lô ${unit} vào Vườn ${input.gardenType}`, metadata: { plotIds: unitPlotIds, gardenType: input.gardenType, count: unitPlotIds.length, unit, ...details } })));
       return { success: true, updated };
     }),
+    allocateGardenPortion: adminProcedure.input(z.object({ plotId: z.number().int().positive(), gardenType: z.enum(["A", "B", "C"]), areaHa: z.coerce.number().positive("Diện tích phải lớn hơn 0").max(999999), tappingTrees: z.coerce.number().int().min(0, "Số cây cạo không được âm").max(99999999) })).mutation(async ({ input, ctx }) => {
+      const plot = await db.getPlotById(input.plotId);
+      if (!plot) throw new TRPCError({ code: "NOT_FOUND", message: "Không tìm thấy Lô" });
+      const result = await db.allocatePlotGardenPortion(input, ctx.user.id);
+      await db.logActivity(ctx.user.id, { eventType: "plot.garden_portion.allocate", entityType: "plot_garden_allocation", entityId: input.plotId, summary: `Phân bổ ${plot.name} vào Vườn ${input.gardenType}`, metadata: { plotId: input.plotId, plotCode: plot.code, plotName: plot.name, unit: plot.unit, gardenType: input.gardenType, areaHa: input.areaHa, tappingTrees: input.tappingTrees, remainingAreaHa: result.remainingAreaHa, remainingTappingTrees: result.remainingTappingTrees } });
+      return { success: true, ...result };
+    }),
     remove: adminProcedure.input(z.object({ id: z.number().int().positive() })).mutation(async ({ input, ctx }) => {
       await db.removePlot(input.id);
       await db.logActivity(ctx.user.id, { eventType: "plot.remove", entityType: "plot", entityId: input.id, summary: "Xóa vườn" });
